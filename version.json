@@ -1,0 +1,17 @@
+{
+  "site": "video",
+  "build": "sa-video-1",
+  "hero": "videos/gym-floor.mp4",
+  "locks": [
+    "html-no-store",
+    "meta-no-cache",
+    "fingerprinted-assets",
+    "version-json",
+    "service-worker",
+    "bfcache-opt-out",
+    "open-graph-video",
+    "stale-document-reload",
+    "response-identity",
+    "ci-guard"
+  ]
+}

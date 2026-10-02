@@ -1,0 +1,14 @@
+name: Video site guard
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  guard:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Refuse a publish that is not the video site
+        run: bash scripts/check-video-site.sh

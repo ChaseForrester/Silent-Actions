@@ -1,13 +1,50 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-site="video" data-build="sa-video-1">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate, max-age=0">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  <meta name="silent-actions-site" content="video">
+  <meta name="silent-actions-build" content="sa-video-1">
   <title>Bag — Silent Actions</title>
   <meta name="description" content="Your Silent Actions bag. Pay with card, Afterpay, or Zip Pay.">
-  <link rel="icon" href="images/logo.png" type="image/png">
-  <link rel="stylesheet" href="css/styles.css">
+  <link rel="canonical" href="https://silentactions.vercel.app/cart.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Silent Actions">
+  <meta property="og:title" content="Bag — Silent Actions">
+  <meta property="og:description" content="Your Silent Actions bag. Pay with card, Afterpay, or Zip Pay.">
+  <meta property="og:url" content="https://silentactions.vercel.app/cart.html">
+  <meta property="og:updated_time" content="2026-10-02T03:10:00Z">
+  <meta property="og:image" content="https://silentactions.vercel.app/images/moodboard.jpg?v=sa-video-1">
+  <meta property="og:image:alt" content="Silent Actions motocross, gym and streetwear">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Bag — Silent Actions">
+  <meta name="twitter:description" content="Your Silent Actions bag. Pay with card, Afterpay, or Zip Pay.">
+  <meta name="twitter:image" content="https://silentactions.vercel.app/images/moodboard.jpg?v=sa-video-1">
+  <link rel="icon" href="images/logo.png?v=sa-video-1" type="image/png">
+  <link rel="stylesheet" href="css/styles.css?v=sa-video-1">
+  <script>
+    (function () {
+      var BUILD = "sa-video-1";
+      fetch("/version.json", { cache: "no-store", credentials: "same-origin" }).then(function (res) {
+        return res.ok ? res.json() : null;
+      }).then(function (data) {
+        if (!data || (data.site === "video" && data.build === BUILD)) return;
+        var next = data.build || BUILD;
+        var key = "sa-bust-" + next;
+        try {
+          if (sessionStorage.getItem(key) === "1") return;
+          sessionStorage.setItem(key, "1");
+        } catch (err) { return; }
+        var url = new URL(location.href);
+        url.searchParams.set("sa", next);
+        location.replace(url.toString());
+      }).catch(function () { });
+    })();
+  </script>
 </head>
 
 <body data-page="cart">
@@ -15,7 +52,7 @@
   <div data-header></div>
   <main class="container cart-layout" data-cart></main>
   <div data-footer></div>
-  <script src="js/app.js"></script>
+  <script src="js/app.js?v=sa-video-1"></script>
 </body>
 
 </html>

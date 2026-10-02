@@ -1,14 +1,56 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-site="video" data-build="sa-video-1">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate, max-age=0">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  <meta name="silent-actions-site" content="video">
+  <meta name="silent-actions-build" content="sa-video-1">
   <title>Silent Actions — Mute the ping. Keep the work.</title>
   <meta name="description"
     content="Silent Actions: motocross, gym and streetwear. Organic cotton, recycled fibre, Fairtrade. Mute the ping. Keep the work. Afterpay and Zip Pay.">
-  <link rel="icon" href="images/logo.png" type="image/png">
-  <link rel="stylesheet" href="css/styles.css">
+  <link rel="canonical" href="https://silentactions.vercel.app/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Silent Actions">
+  <meta property="og:title" content="Silent Actions — Mute the ping. Keep the work.">
+  <meta property="og:description"
+    content="Motocross, gym and streetwear. The video site. Mute the ping. Keep the work.">
+  <meta property="og:url" content="https://silentactions.vercel.app/">
+  <meta property="og:updated_time" content="2026-10-02T03:10:00Z">
+  <meta property="og:image" content="https://silentactions.vercel.app/images/moodboard.jpg?v=sa-video-1">
+  <meta property="og:image:alt" content="Silent Actions motocross, gym and streetwear">
+  <meta property="og:video" content="https://silentactions.vercel.app/videos/gym-floor.mp4?v=sa-video-1">
+  <meta property="og:video:secure_url" content="https://silentactions.vercel.app/videos/gym-floor.mp4?v=sa-video-1">
+  <meta property="og:video:type" content="video/mp4">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Silent Actions — Mute the ping. Keep the work.">
+  <meta name="twitter:description" content="Motocross, gym and streetwear. The video site.">
+  <meta name="twitter:image" content="https://silentactions.vercel.app/images/moodboard.jpg?v=sa-video-1">
+  <link rel="icon" href="images/logo.png?v=sa-video-1" type="image/png">
+  <link rel="preload" as="video" href="videos/gym-floor.mp4?v=sa-video-1" type="video/mp4">
+  <link rel="stylesheet" href="css/styles.css?v=sa-video-1">
+  <script>
+    (function () {
+      var BUILD = "sa-video-1";
+      fetch("/version.json", { cache: "no-store", credentials: "same-origin" }).then(function (res) {
+        return res.ok ? res.json() : null;
+      }).then(function (data) {
+        if (!data || (data.site === "video" && data.build === BUILD)) return;
+        var next = data.build || BUILD;
+        var key = "sa-bust-" + next;
+        try {
+          if (sessionStorage.getItem(key) === "1") return;
+          sessionStorage.setItem(key, "1");
+        } catch (err) { return; }
+        var url = new URL(location.href);
+        url.searchParams.set("sa", next);
+        location.replace(url.toString());
+      }).catch(function () { });
+    })();
+  </script>
 </head>
 
 <body data-page="home">
@@ -18,7 +60,7 @@
   <section class="hero">
     <video autoplay muted loop playsinline disablepictureinpicture disableremoteplayback preload="auto"
       poster="images/moodboard.jpg" aria-label="Gym session in Silent Actions kit" data-silent>
-      <source src="videos/gym-floor.mp4" type="video/mp4">
+      <source src="videos/gym-floor.mp4?v=sa-video-1" type="video/mp4">
     </video>
     <div class="hero-veil"></div>
     <div class="hero-copy">
@@ -51,7 +93,7 @@
     <div class="container split">
       <video autoplay muted loop playsinline disablepictureinpicture disableremoteplayback preload="metadata"
         poster="images/portrait.jpg" aria-label="Streetwear look in a night carpark" data-silent>
-        <source src="videos/street.mp4" type="video/mp4">
+        <source src="videos/street.mp4?v=sa-video-1" type="video/mp4">
       </video>
       <div class="reveal">
         <span class="eyebrow">Three lanes</span>
@@ -98,7 +140,7 @@
     </div>
     <video autoplay muted loop playsinline disablepictureinpicture disableremoteplayback preload="metadata"
       poster="images/breath.jpg" aria-label="Athlete sitting on a gym floor after a session" data-silent>
-      <source src="videos/gym-session.mp4" type="video/mp4">
+      <source src="videos/gym-session.mp4?v=sa-video-1" type="video/mp4">
     </video>
   </section>
 
@@ -134,13 +176,13 @@
       </div>
       <video autoplay muted loop playsinline disablepictureinpicture disableremoteplayback preload="metadata"
         poster="images/stack.jpg" aria-label="Motocross kit on the move" data-silent>
-        <source src="videos/mx.mp4" type="video/mp4">
+        <source src="videos/mx.mp4?v=sa-video-1" type="video/mp4">
       </video>
     </div>
   </section>
 
   <div data-footer></div>
-  <script src="js/app.js"></script>
+  <script src="js/app.js?v=sa-video-1"></script>
 </body>
 
 </html>

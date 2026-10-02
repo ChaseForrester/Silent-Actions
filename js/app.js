@@ -1,3 +1,67 @@
+(function () {
+  var BUILD = "sa-video-1";
+  var SITE = "video";
+  var root = document.documentElement;
+
+  function storageGet(key) {
+    try { return sessionStorage.getItem(key); } catch (err) { return null; }
+  }
+  function storageSet(key, value) {
+    try { sessionStorage.setItem(key, value); } catch (err) { }
+  }
+  function storageDel(key) {
+    try { sessionStorage.removeItem(key); } catch (err) { }
+  }
+
+  function reloadOnce(nextBuild) {
+    var build = nextBuild || BUILD;
+    var key = "sa-bust-" + build;
+    if (storageGet(key) === "1") return;
+    storageSet(key, "1");
+    var url = new URL(window.location.href);
+    url.searchParams.set("sa", build);
+    window.location.replace(url.toString());
+  }
+
+  var stale = root.getAttribute("data-site") !== SITE || root.getAttribute("data-build") !== BUILD;
+  if (stale) {
+    reloadOnce();
+  } else {
+    storageDel("sa-bust-" + BUILD);
+    document.cookie = "sa_build=" + BUILD + "; Path=/; Max-Age=31536000; SameSite=Lax";
+  }
+
+  window.addEventListener("pageshow", function (event) {
+    if (!event.persisted) {
+      storageDel("sa-bf-" + BUILD);
+      return;
+    }
+    if (storageGet("sa-bf-" + BUILD) === "1") return;
+    storageSet("sa-bf-" + BUILD, "1");
+    window.location.reload();
+  });
+  window.addEventListener("unload", function () { });
+
+  if (!stale) {
+    fetch("/version.json", { cache: "no-store", credentials: "same-origin" })
+      .then(function (res) { return res.ok ? res.json() : null; })
+      .then(function (data) {
+        if (data && (data.site !== SITE || data.build !== BUILD)) reloadOnce(data.build);
+      })
+      .catch(function () { });
+  }
+
+  if ("serviceWorker" in navigator) {
+    navigator.serviceWorker.register("/sw.js", { scope: "/", updateViaCache: "none" }).catch(function () { });
+    navigator.serviceWorker.addEventListener("message", function (event) {
+      var data = event.data || {};
+      if (data.type === "sa-takeover" && data.build && data.build !== root.getAttribute("data-build")) {
+        reloadOnce(data.build);
+      }
+    });
+  }
+})();
+
 const PRODUCTS = [
   {
     id: "m-printed",
