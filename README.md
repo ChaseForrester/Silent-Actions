@@ -1,6 +1,6 @@
 # Silent Actions
 
-Ecological clothing for a quieter mind. Slogan: **Be better Do better**.
+Motocross, gym wear, and streetwear. Slogan: **Be better Do better**.
 
 ## Run locally
 
@@ -13,8 +13,8 @@ Open [http://127.0.0.1:8765](http://127.0.0.1:8765).
 ## Pages
 
 - `index.html` — home
-- `shop.html` — collection
+- `shop.html` — collection (MX / gym / street)
 - `product.html` — garment
-- `mind.html` — Quiet Hour and four-breath practice
-- `story.html` — materials and repair
+- `mind.html` — mental game and four-breath practice
+- `story.html` — three lanes and repair
 - `cart.html` — bag, Afterpay, Zip Pay, and card checkout (demo, no charges)

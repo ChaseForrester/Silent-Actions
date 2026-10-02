@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Shop — Silent Actions</title>
   <meta name="description"
-    content="Shop Silent Actions: organic hoodies, linen, hemp jackets, loungewear and the Quiet Hour journal. Afterpay and Zip Pay available.">
+    content="Shop Silent Actions men's, women's and unisex t-shirts, polos, singlets, crew necks and hoodies. Afterpay and Zip Pay.">
   <link rel="icon" href="images/logo.png" type="image/png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -21,17 +21,22 @@
   <div data-header></div>
 
   <section class="shop-hero">
-    <div class="container">
-      <span class="eyebrow">The collection · Be better Do better</span>
-      <h1 style="font-size:clamp(3rem,8vw,6rem);font-style:italic;margin:8px 0 12px">Wear the practice.</h1>
-      <p class="lede">Ten garments. Regenerative fibres. Cut for comfort of body and mind. Split any order with Afterpay
-        or Zip Pay.</p>
-      <div class="filters" role="tablist">
-        <button class="filter-btn" data-filter="all" aria-pressed="true">All</button>
-        <button class="filter-btn" data-filter="wear" aria-pressed="false">Wear</button>
-        <button class="filter-btn" data-filter="rest" aria-pressed="false">Rest</button>
+    <div class="container shop-layout">
+      <aside class="shop-sidebar" data-shop-nav></aside>
+      <div>
+        <span class="eyebrow">Shop · Be better Do better</span>
+        <h1 data-shop-title style="font-size:clamp(2.6rem,6vw,5rem);font-style:italic;margin:8px 0 12px">The collection
+        </h1>
+        <p class="lede" data-shop-lede>T-shirts, polos, singlets, crews and hoodies. Motocross, gym and street. Afterpay
+          and Zip Pay.</p>
+        <div class="filters" role="tablist">
+          <button class="filter-btn" data-filter="all" aria-pressed="true">All lanes</button>
+          <button class="filter-btn" data-filter="mx" aria-pressed="false">Motocross</button>
+          <button class="filter-btn" data-filter="gym" aria-pressed="false">Gym</button>
+          <button class="filter-btn" data-filter="street" aria-pressed="false">Street</button>
+        </div>
+        <div class="product-grid" data-product-grid></div>
       </div>
-      <div class="product-grid" data-product-grid></div>
     </div>
   </section>
 
@@ -45,6 +50,12 @@
           <img src="images/pay/zip-pay.png" alt="Zip Pay">
         </span>
         <span class="pay-note">Four interest-free payments. Choose at checkout.</span>
+      </div>
+      <p class="eyebrow" style="margin-top:36px">Certified</p>
+      <div class="cert-logos" style="margin-top:16px">
+        <img src="images/certs/fairtrade.png" alt="Fairtrade">
+        <img src="images/certs/bcorp.png" alt="Certified B Corporation">
+        <img src="images/certs/social-traders.png" alt="Social Traders Certified Social Enterprise">
       </div>
     </div>
   </section>
