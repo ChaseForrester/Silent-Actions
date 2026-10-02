@@ -530,7 +530,7 @@ function headerHTML() {
             </svg>
             <span class="bag-count" data-bag-count hidden>0</span>
           </a>
-          <button class="menu-toggle" aria-label="Open menu" data-menu-toggle>
+          <button class="menu-toggle" aria-label="Open menu" aria-expanded="false" data-menu-toggle>
             <span></span><span></span><span></span>
           </button>
         </div>
@@ -538,8 +538,11 @@ function headerHTML() {
     </header>
     <nav class="mobile-nav" data-mobile-nav>
       <a href="index.html">Home</a>
-      <a href="shop.html">Shop</a>
-      ${shopNavHTML()}
+      <details class="mobile-shop">
+        <summary>Shop</summary>
+        ${shopNavHTML()}
+      </details>
+      <a href="shop.html">All kit</a>
       <a href="mind.html">Mind</a>
       <a href="story.html">Story</a>
       <a href="size-guide.html">Size guide</a>
@@ -775,6 +778,7 @@ function renderCartPage() {
       <div class="empty">
         <p class="eyebrow">Bag</p>
         <h1 style="font-size:clamp(2.6rem,6vw,4.5rem);margin:10px 0 16px">Your bag is quiet.</h1>
+        <p class="lede" style="margin:0 0 8px">Nothing in here yet. The kit is waiting.</p>
         <a class="btn btn-dark" href="shop.html">Shop the collection</a>
       </div>
     `;
@@ -927,6 +931,34 @@ function initBreath() {
   });
 }
 
+function initSilentVideos() {
+  const videos = document.querySelectorAll("video[data-silent]");
+  const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  videos.forEach((video) => {
+    video.muted = true;
+    video.defaultMuted = true;
+    video.volume = 0;
+    video.setAttribute("muted", "");
+    video.playsInline = true;
+    if (reduce) {
+      video.removeAttribute("autoplay");
+      video.pause();
+    }
+  });
+  if (reduce || !videos.length) return;
+  const io = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        const video = entry.target;
+        if (entry.isIntersecting) video.play().catch(() => { });
+        else video.pause();
+      });
+    },
+    { threshold: 0.35 }
+  );
+  videos.forEach((video) => io.observe(video));
+}
+
 function initMotion() {
   const nodes = document.querySelectorAll(".product-card, .reveal, .split > img, .band img");
   nodes.forEach((el, i) => {
@@ -957,8 +989,17 @@ function mount() {
   if (headerMount) headerMount.outerHTML = headerHTML();
   if (footerMount) footerMount.outerHTML = footerHTML();
 
-  document.querySelector("[data-menu-toggle]")?.addEventListener("click", () => {
-    document.querySelector("[data-mobile-nav]")?.classList.toggle("open");
+  const menuBtn = document.querySelector("[data-menu-toggle]");
+  const mobileNav = document.querySelector("[data-mobile-nav]");
+  function setMenu(open) {
+    mobileNav?.classList.toggle("open", open);
+    document.body.classList.toggle("menu-open", open);
+    menuBtn?.setAttribute("aria-expanded", String(open));
+    menuBtn?.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+  }
+  menuBtn?.addEventListener("click", () => setMenu(!mobileNav?.classList.contains("open")));
+  mobileNav?.querySelectorAll("a").forEach((link) => {
+    link.addEventListener("click", () => setMenu(false));
   });
 
   document.querySelector("[data-newsletter]")?.addEventListener("submit", (event) => {
@@ -973,6 +1014,7 @@ function mount() {
   renderCartPage();
   initBreath();
   updateBagCount();
+  initSilentVideos();
   initMotion();
 
   document.querySelectorAll("[data-filter]").forEach((btn) => {
@@ -985,7 +1027,9 @@ function mount() {
       else url.searchParams.set("lane", lane);
       history.replaceState({}, "", url);
       renderShop();
-      initMotion();
+      document.querySelectorAll("[data-product-grid] .product-card").forEach((el) => {
+        el.classList.add("will-reveal", "is-in");
+      });
     });
   });
 }
